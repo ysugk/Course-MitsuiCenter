@@ -1,24 +1,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Estimation Project
-% Day1_Setup.m
+% Day2_Setup.m
 % Yongseok Kim - Indiana University
 % 2021 Summer Summer School on Structural Estimation in Corporate Finance 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 disp('%%% Set up grids and discretization and payoffs')
 disp(' ')
-addpath('build/function')
 tic
-
-%%%%%%%%%% set up grid for endogenous capitals
-
-kgrid = linspace(kmin,kmax,knum)';
 
 %%%%%%%%%% set up loglinear grid & discretization for exogenous profitability process
 
 [zgrid, pr_mat_z] = tauchen(0, sig, rho, znstdev, znum);
 zgrid = exp(zgrid)'; %convert to levels, mnum x 1
 pr_mat_z(pr_mat_z<0) = 0; %fix rounding issue leading to negatives in tauchen() function
+
+%%%%%%%%%% set up grid for endogenous capitals
+kmin=0.5*(alpha*zgrid(1)*beta/(1-(1-delta)*beta))^(1/(1-alpha));
+kmax=(alpha*zgrid(znum)*beta/(1-(1-delta)*beta))^(1/(1-alpha));
+
+kgrid = linspace(kmin,kmax,knum)';
 
 %%%%%%%%%% set up index of the state space
 grid_val = zeros(statenum,2); %mnum*pnum x 2, with (i,1) = value of k, (i,2) = value of z
@@ -38,6 +39,8 @@ Estarmat = repmat(grid_val(:,2),1,knum) .* (repmat(grid_val(:,1),1,knum).^alpha)
     - repmat(kgrid',statenum,1) ...
     + (1-delta) * repmat(grid_val(:,1),1,knum);
 
-Emat = Estarmat
-Estarmat(Etarmat<0) = Estarmat(Estarmat<0) * (1 + lambda)
+Emat = Estarmat;
+Emat(Estarmat<0) = Estarmat(Estarmat<0) * (1 + lambda);
 
+toc
+disp(' ')

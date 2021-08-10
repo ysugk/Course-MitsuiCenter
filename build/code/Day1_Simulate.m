@@ -95,6 +95,10 @@ ylabel('k_t')
 axis([1 Tsim min(ksim(:))*0.95 max(ksim(:))*1.05])
 set(gca,'FontSize',fsizenum)
 
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig3.pdf');
+clf;
+
 figure;
 plot((1:Tsim),zsim(1,:),'b',...
     (1:Tsim),zsim(2,:),'g',...
@@ -106,12 +110,20 @@ ylabel('z_t')
 axis([1 Tsim min(zsim(:))*0.95 max(zsim(:))*1.05])
 set(gca,'FontSize',fsizenum)
 
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig4.pdf');
+clf;
+
 figure;
 hist(zsim(:))
 title('Simulated Distribution: Firm Profitability')
 ylabel('Simulated Frequency')
 xlabel('m')
 set(gca,'FontSize',fsizenum)
+
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig5.pdf');
+clf;
 
 figure;
 hist(ksim(:))
@@ -120,12 +132,20 @@ ylabel('Simulated Frequency')
 xlabel('k')
 set(gca,'FontSize',fsizenum)
 
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig6.pdf');
+clf;
+
 figure;
 scatter(zsim(:),ksim(:),'b')
 title('Simulated Scatter Plot')
 ylabel('Firm Capital k')
 xlabel('Firm Profitability z')
 set(gca,'FontSize',fsizenum)
+
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig7.pdf');
+clf;
 
 klag = ksim(:,1:(end-1));
 know = ksim(:,2:end);
@@ -137,6 +157,10 @@ title('Simulated Scatter Plot')
 ylabel('Firm Capital k')
 xlabel('Firm Lagged Capital k_{-1}')
 set(gca,'FontSize',fsizenum)
+
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig8.pdf');
+clf;
 
 toc
 disp(' ')

@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Estimation Project
+% Day1_Wrapper.m
+% Yongseok Kim - Indiana University
+% 2021 Summer Summer School on Structural Estimation in Corporate Finance 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function [V, polind] = Day2_solve_model(alpha, delta)
+
+    % global parameters:
+    % model: beta, rho, sig, lambda
+    % solution: knum, kmin, kmax, znum, znstdev, statenum, soltol, maxit
+    global beta rho sig lambda knum kmin kmax znum znstdev statenum ...
+    soltol maxit
+    
+    %%%%%%%%%% do the VFI loop
+    run('Day2_VFI_MPQ.m')
+    
+end

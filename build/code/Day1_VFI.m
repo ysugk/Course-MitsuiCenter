@@ -74,6 +74,10 @@ set(gca,'FontSize',fsizenum)
 legend('Low z','Medium z','High z','FontSize',fsizenum,'Location','northwest')
 legend boxoff
 
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig1.pdf');
+clf;
+
 figure
 plot(kgrid,pol(:,2),'b',...
     kgrid,pol(:,floor(znum/2)),'g',...
@@ -86,6 +90,10 @@ axis([kgrid(1) kgrid(knum) kgrid(1) kgrid(knum)])
 set(gca,'FontSize',fsizenum)
 legend('Low z','Medium z','High z','Identity','FontSize',fsizenum,'Location','northwest')
 legend boxoff
+
+p = gcf;
+exportgraphics(p, 'build/output/figs/Day1-fig2.pdf');
+clf;
 
 toc
 disp(' ')
